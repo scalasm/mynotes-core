@@ -203,3 +203,25 @@ def docs(session: Session) -> None:
         shutil.rmtree(build_dir)
 
     session.run("sphinx-autobuild", *args)
+
+
+# Files and directories that will be processes by linting,
+# code formatting and similar tools.
+source_code_locations = "src", "tests", "noxfile.py"
+
+
+# noxfile.py
+@nox.session(python="3.10")
+def black(session: Session) -> None:
+    """Format code according to Black configuration."""
+    args = session.posargs or source_code_locations
+    session.install("black")
+    session.run("black", *args)
+
+
+@nox.session(python=["3.10"])
+def lint(session: Session) -> None:
+    """Run Flake8 linting."""
+    args = session.posargs or source_code_locations
+    session.install("flake8", "flake8-black", "flake8-bugbear", "flake8-import-order")
+    session.run("flake8", *args)
