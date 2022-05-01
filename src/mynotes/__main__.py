@@ -8,5 +8,6 @@ def main() -> None:
     """Mynotes Core."""
     print("Hello MyNotes Core!")
 
+
 if __name__ == "__main__":
     main(prog_name="mynotes-core")  # pragma: no cover
