@@ -1,4 +1,5 @@
 """Notes API endpoints."""
+from typing import Optional
 import uuid
 
 from fastapi import APIRouter
@@ -29,7 +30,7 @@ all_notes = {"1": STUB_NOTE}
 
 
 @router.get("/{note_id}")
-async def get_note(note_id: str) -> Note | None:
+async def get_note(note_id: str) -> Optional[Note]:
     """Get a single note by id.
 
     Args:
