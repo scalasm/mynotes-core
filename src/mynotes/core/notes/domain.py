@@ -1,13 +1,15 @@
 """Notes business logic."""
-
-from abc import ABC, abstractmethod
+from abc import ABC
+from abc import abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from typing import List
+
+from pydantic import BaseModel
+
 from mynotes.core.architecture.data_access import DataPage
 from mynotes.core.architecture.data_access import DataPageQuery
-from pydantic import BaseModel
 
 
 class NoteType(Enum):

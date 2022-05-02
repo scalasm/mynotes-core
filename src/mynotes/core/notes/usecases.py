@@ -1,11 +1,10 @@
 """Use cases around the Note entities."""
-
 from dataclasses import dataclass
 from typing import List
-from .domain import Note
-from .domain import NoteRepository
 
 from ..architecture.auth import User
+from .domain import Note
+from .domain import NoteRepository
 
 
 @dataclass

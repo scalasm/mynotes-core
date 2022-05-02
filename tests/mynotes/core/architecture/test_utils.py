@@ -1,7 +1,10 @@
-from typing import Any, Dict
+from typing import Any
+from typing import Dict
+
 import pytest
 
-from mynotes.core.architecture.utils import encode_dict_to_base64, decode_str_as_dict
+from mynotes.core.architecture.utils import decode_str_as_dict
+from mynotes.core.architecture.utils import encode_dict_to_base64
 
 
 SAMPLE_CONTINUATION_TOKEN = {

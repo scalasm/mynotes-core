@@ -1,15 +1,13 @@
 """Notes API endpoints."""
-
 import uuid
+
 from fastapi import APIRouter
 from fastapi import Depends
 
+from .dependencies import get_token_header
+from mynotes.core.architecture.utils import now
 from mynotes.core.notes.domain import Note
 from mynotes.core.notes.domain import NoteType
-
-from mynotes.core.architecture.utils import now
-
-from .dependencies import get_token_header
 
 router = APIRouter(
     prefix="/notes",

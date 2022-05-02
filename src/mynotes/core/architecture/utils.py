@@ -1,12 +1,10 @@
 """Generic utilities."""
-from typing import Any
-from typing import Dict
-
+import base64
+import json
 from datetime import datetime
 from datetime import timezone
-
-import json
-import base64
+from typing import Any
+from typing import Dict
 
 # The character encoding that we use during Base64 encoding/deconding operations
 INTERNAL_CHAR_ENCODING = "utf-8"

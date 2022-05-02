@@ -1,5 +1,4 @@
 """Authentication domain."""
-
 from dataclasses import dataclass
 
 

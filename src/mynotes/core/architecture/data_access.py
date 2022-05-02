@@ -1,5 +1,4 @@
 """Data access abstractions."""
-
 from dataclasses import dataclass
 from typing import Generic
 from typing import List

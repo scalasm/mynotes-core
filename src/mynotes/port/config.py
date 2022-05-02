@@ -1,5 +1,4 @@
 """Configuration properties."""
-
 import os
 
 # Stack region - This is set directly by AWS

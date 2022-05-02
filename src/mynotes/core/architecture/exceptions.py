@@ -1,5 +1,4 @@
 """Shared architecture elements, like exception management."""
-
 from dataclasses import dataclass
 
 
