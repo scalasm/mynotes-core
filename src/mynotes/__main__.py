@@ -1,5 +1,6 @@
 """Start up for RESTful API application."""
 from typing import Dict
+
 import uvicorn
 from fastapi import FastAPI
 
