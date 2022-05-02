@@ -3,9 +3,11 @@ import uuid
 
 from fastapi import APIRouter
 
+from mynotes.core.architecture.data_access import DataPage
 from mynotes.core.architecture.utils import now
 from mynotes.core.notes.domain import Note
 from mynotes.core.notes.domain import NoteType
+
 
 router = APIRouter(
     prefix="/notes",
@@ -27,7 +29,7 @@ all_notes = {"1": STUB_NOTE}
 
 
 @router.get("/{note_id}")
-async def get_note(note_id: str):
+async def get_note(note_id: str) -> Note | None:
     """Get a single note by id.
 
     Args:
@@ -40,18 +42,21 @@ async def get_note(note_id: str):
 
 
 @router.get("/")
-async def get_all_notes():
+async def get_all_notes() -> DataPage[Note]:
     """Get all notes.
 
     Returns:
-        a list of Note objects
+        a DataPage containing the Note objects
     """
-    results = list(all_notes.values)
-    return {"items": results, "size": len(results)}
+    results = list(all_notes.values())
+
+    return DataPage[Note](
+        items=results, page_size=len(results), continuation_token=None
+    )
 
 
 @router.post("/")
-async def post(note: Note):
+async def post(note: Note) -> Note:
     """Create a new note (an ID will automatically be assigned).
 
     Args:
@@ -60,7 +65,7 @@ async def post(note: Note):
     Returns:
         the updated note.
     """
-    note.id = uuid.uuid4()
+    note.id = str(uuid.uuid4())
 
     all_notes[note.id] = note
 

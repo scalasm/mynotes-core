@@ -2,8 +2,8 @@
 from dataclasses import dataclass
 from typing import List
 
-from ..architecture.auth import User
-from .domain import NoteRepository
+from mynotes.core.architecture.auth import User
+from mynotes.core.notes.domain import NoteRepository
 
 
 @dataclass

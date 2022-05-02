@@ -1,4 +1,5 @@
 """Start up for RESTful API application."""
+from typing import Dict
 import uvicorn
 from fastapi import FastAPI
 
@@ -11,12 +12,12 @@ app.include_router(notes_api.router)
 
 
 @app.get("/")
-def root():
+def root() -> Dict[str, str]:
     """Displays a simple message for the root path."""
     return {"message": "Hello World from main app"}
 
 
-def start():
+def start() -> None:
     """Launched with `poetry run start` at root level."""
     uvicorn.run(
         "mynotes.__main__:app",
@@ -27,4 +28,4 @@ def start():
 
 
 if __name__ == "__main__":
-    start(prog_name="mynotes-core")  # pragma: no cover
+    start()  # pragma: no cover

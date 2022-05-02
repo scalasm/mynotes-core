@@ -3,7 +3,7 @@ import base64
 import json
 from datetime import datetime
 from datetime import timezone
-from typing import Any
+from typing import Any, Optional, cast
 from typing import Dict
 
 # The character encoding that we use during Base64 encoding/deconding
@@ -29,7 +29,7 @@ def encode_dict_to_base64(dictionary: Dict[str, Any]) -> str:
     return base64.b64encode(json_content_bytes).decode(INTERNAL_CHAR_ENCODING)
 
 
-def decode_str_as_dict(base64_str: str) -> Dict[str, Any]:
+def decode_str_as_dict(base64_str: str) -> Optional[Dict[str, Any]]:
     """Decode a Base64 encoded dictionary.
 
     This method is designed to work as a companion to 'encode_dict_to_base64'
@@ -45,7 +45,7 @@ def decode_str_as_dict(base64_str: str) -> Dict[str, Any]:
         return None
 
     json_content = base64.b64decode(base64_str).decode(INTERNAL_CHAR_ENCODING)
-    return json.loads(json_content)
+    return cast(Dict[str, Any], json.loads(json_content))
 
 
 def now() -> datetime:

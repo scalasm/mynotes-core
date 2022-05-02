@@ -10,7 +10,7 @@ class DataPageQuery:
     """Groups usual query parameters for a set of data."""
 
     page_size: int = 10
-    continuation_token: str = None
+    continuation_token: str | None = None
 
 
 # Generic data type per items in a data page
@@ -23,4 +23,4 @@ class DataPage(Generic[T]):
 
     items: List[T]
     page_size: int
-    continuation_token: str
+    continuation_token: str | None
