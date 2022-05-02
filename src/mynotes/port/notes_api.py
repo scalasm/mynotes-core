@@ -1,6 +1,6 @@
 """Notes API endpoints."""
-from typing import Optional
 import uuid
+from typing import Optional
 
 from fastapi import APIRouter
 
