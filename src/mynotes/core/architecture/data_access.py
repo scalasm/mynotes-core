@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 from typing import Generic
 from typing import List
+from typing import Optional
 from typing import TypeVar
 
 
@@ -10,7 +11,7 @@ class DataPageQuery:
     """Groups usual query parameters for a set of data."""
 
     page_size: int = 10
-    continuation_token: str | None = None
+    continuation_token: Optional[str] = None
 
 
 # Generic data type per items in a data page
@@ -23,4 +24,4 @@ class DataPage(Generic[T]):
 
     items: List[T]
     page_size: int
-    continuation_token: str | None
+    continuation_token: Optional[str] = None

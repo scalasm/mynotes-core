@@ -26,4 +26,4 @@ class ResourceNotFoundError(RepositoryError):
     """No Resource was found for a given type and id."""
 
     resource_type: str
-    resource_id: str | int
+    resource_id: str

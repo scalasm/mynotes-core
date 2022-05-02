@@ -32,7 +32,7 @@ def test_encode(continuation_token_dict: Dict[str, Any], expected_string: str) -
 
 test_decode_test_data = [
     (SAMPLE_CONTINUATION_TOKEN_BASE64, SAMPLE_CONTINUATION_TOKEN),
-    (None, None),
+    ("", None),
 ]
 
 
