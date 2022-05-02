@@ -2,9 +2,7 @@
 import uuid
 
 from fastapi import APIRouter
-from fastapi import Depends
 
-from .dependencies import get_token_header
 from mynotes.core.architecture.utils import now
 from mynotes.core.notes.domain import Note
 from mynotes.core.notes.domain import NoteType
@@ -30,23 +28,40 @@ all_notes = {"1": STUB_NOTE}
 
 @router.get("/{note_id}")
 async def get_note(note_id: str):
-    note = all_notes.get(note_id, None)
+    """Get a single note by id.
 
-    results = {"note_id": note.id, "item": note}
-    return results
+    Args:
+        note_id: the id for the note
+
+    Returns:
+        the single Note object mathing the requested id
+    """
+    return all_notes.get(note_id, None)
 
 
 @router.get("/")
 async def get_all_notes():
-    results = {"notes": list(all_notes.values)}
-    return results
+    """Get all notes.
+
+    Returns:
+        a list of Note objects
+    """
+    results = list(all_notes.values)
+    return {"items": results, "size": len(results)}
 
 
 @router.post("/")
 async def post(note: Note):
+    """Create a new note (an ID will automatically be assigned).
+
+    Args:
+        note: the note to create
+
+    Returns:
+        the updated note.
+    """
     note.id = uuid.uuid4()
 
     all_notes[note.id] = note
 
-    results = {"note_id": note.id, "item": STUB_NOTE}
-    return results
+    return note

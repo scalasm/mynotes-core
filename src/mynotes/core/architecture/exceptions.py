@@ -2,27 +2,27 @@
 from dataclasses import dataclass
 
 
-class ApplicationException(Exception):
+class ApplicationError(Exception):
     """Base class for all application exception."""
 
     pass
 
 
-class ValidationException(ApplicationException):
+class ValidationError(ApplicationError):
     """Something happened about the required input values."""
 
     attribute_name: str
     error_message: str
 
 
-class RepositoryException(ApplicationException):
+class RepositoryError(ApplicationError):
     """Exception throws because of the errors in the repository layer."""
 
     pass
 
 
 @dataclass
-class ResourceNotFoundException(RepositoryException):
+class ResourceNotFoundError(RepositoryError):
     """No Resource was found for a given type and id."""
 
     resource_type: str

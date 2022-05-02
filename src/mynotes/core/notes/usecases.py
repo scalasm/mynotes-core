@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import List
 
 from ..architecture.auth import User
-from .domain import Note
 from .domain import NoteRepository
 
 
@@ -14,4 +13,5 @@ class CreateNoteUseCase:
     note_repository: NoteRepository
 
     def create_note(self, author: User, text: str, tags: List[str]) -> None:
+        """Create a new note."""
         pass

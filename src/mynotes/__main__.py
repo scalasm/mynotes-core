@@ -12,14 +12,15 @@ app.include_router(notes_api.router)
 
 @app.get("/")
 def root():
+    """Displays a simple message for the root path."""
     return {"message": "Hello World from main app"}
 
 
 def start():
-    """Launched with `poetry run start` at root level"""
+    """Launched with `poetry run start` at root level."""
     uvicorn.run(
         "mynotes.__main__:app",
-        host="0.0.0.0",
+        host="localhost",
         port=config.MYNOTES_HTTP_PORT,
         reload=config.MYNOTES_DEV_MODE,
     )  # pragma: no cover

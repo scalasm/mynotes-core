@@ -1,10 +1,10 @@
 """Notes business logic."""
 from abc import ABC
 from abc import abstractmethod
-from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from typing import List
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -37,18 +37,47 @@ class NoteRepository(ABC):
 
     @abstractmethod
     def save(self, note: Note) -> None:
+        """Save a note.
+
+        Args:
+            note: the note to save
+        """
         pass
 
     @abstractmethod
-    def find_by_id(self, id: str) -> None:
+    def find_by_id(self, note_id: str) -> Optional[Note]:
+        """Find a note by its id.
+
+        Args:
+            note_id: the id of the note to find
+
+        Returns
+            a valid Note object if such id exists or None otherwise
+        """
         pass
 
     @abstractmethod
-    def delete_by_id(self, id: str) -> None:
+    def delete_by_id(self, note_id: str) -> None:
+        """Delete a note by its id.
+
+        Note that nothing will happen if such id is not present.
+
+        Args:
+            note_id: the id of the note to delete
+        """
         pass
 
     @abstractmethod
     def find_all_by_type(
         self, note_type: NoteType, data_page_query: DataPageQuery
     ) -> DataPage[Note]:
+        """Find all notes of the requested type.
+
+        Args:
+            note_type: the required note type to search for
+            data_page_query: paging data for running the query
+
+        Returns
+            a DataPage, eventually empty if no data was found
+        """
         pass
