@@ -1,0 +1,1 @@
+"""MyNotes Core Architecture."""

@@ -48,6 +48,7 @@ You need Python 3.8+ and the following tools:
 - Poetry_
 - Nox_
 - nox-poetry_
+- FastAPI_
 
 Install the package with development requirements:
 
@@ -61,12 +62,23 @@ or the command-line interface:
 .. code:: console
 
    $ poetry run python
+
+You can run the REST API as standalone tool - this
+is especially useful if you want to run your API in
+live coding.
+
+By default *live code is disabled* and *HTTP port is 8000*.
+
+.. code:: console
+
    $ poetry run mynotes-core
+   $ MYNOTES_DEV_MODE=true poetry run mynotes-core
+   $ MYNOTES_HTTP_PORT=9080 MYNOTES_DEV_MODE=true poetry run mynotes-core
 
 .. _Poetry: https://python-poetry.org/
 .. _Nox: https://nox.thea.codes/
 .. _nox-poetry: https://nox-poetry.readthedocs.io/
-
+.. _FastAPI: https://fastapi.tiangolo.com/
 
 How to test the project
 -----------------------

@@ -2,7 +2,7 @@
 from datetime import datetime
 
 
-project = "Mynotes Core"
+project = "MyNotes Core"
 author = "Mario Scalas"
 copyright = f"{datetime.now().year}, {author}"
 extensions = [

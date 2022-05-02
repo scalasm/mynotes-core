@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mynotes-core"
 version = "0.0.0"
-description = "Mynotes Core"
+description = "MyNotes Core"
 authors = ["Mario Scalas <mario.scalas@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
@@ -21,6 +21,8 @@ Changelog = "https://github.com/scalasm/mynotes-core/releases"
 [tool.poetry.dependencies]
 python = "^3.8"
 click = "^8.0.1"
+fastapi = "^0.75.2"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
@@ -51,7 +53,7 @@ bandit = "1.7.2"
 pytest-mock = "^3.7.0"
 
 [tool.poetry.scripts]
-mynotes-core = "mynotes.__main__:main"
+mynotes-core = "mynotes.__main__:start"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]

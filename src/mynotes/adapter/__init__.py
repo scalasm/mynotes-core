@@ -1,0 +1,1 @@
+"""MyNotes Adapter(s)."""

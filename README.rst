@@ -1,4 +1,4 @@
-Mynotes Core
+MyNotes Core
 ============
 
 |PyPI| |Status| |Python Version| |License|
@@ -39,19 +39,19 @@ Mynotes Core
 Features
 --------
 
-* TODO
+* A simple RESTful API for tracking your notes.
 
 
 Requirements
 ------------
 
-* TODO
+* Python 3.8 or better
 
 
 Installation
 ------------
 
-You can install *Mynotes Core* via pip_ from PyPI_:
+You can install *MyNotes Core* via pip_ from PyPI_:
 
 .. code:: console
 
@@ -75,7 +75,7 @@ License
 -------
 
 Distributed under the terms of the `MIT license`_,
-*Mynotes Core* is free and open source software.
+*MyNotes Core* is free and open source software.
 
 
 Issues
