@@ -79,6 +79,7 @@ By default *live code is disabled* and *HTTP port is 8000*.
 .. _Nox: https://nox.thea.codes/
 .. _nox-poetry: https://nox-poetry.readthedocs.io/
 .. _FastAPI: https://fastapi.tiangolo.com/
+.. _RemoteContainers: https://code.visualstudio.com/docs/remote/containers#_using-ssh-keys
 
 How to develop with Visual Studio Code
 --------------------------------------
@@ -99,6 +100,10 @@ Ensure that your *.vscode/settings.json* configuration has the following options
    "python.linting.pylintEnabled": false,
    "python.languageServer": "Pylance"
    }
+
+(If you use SSH, you may find useful RemoteContainers_ that describes how to share your
+SSH key between your host and your remote container)
+
 
 How to test the project
 -----------------------
