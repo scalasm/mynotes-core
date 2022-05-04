@@ -80,6 +80,26 @@ By default *live code is disabled* and *HTTP port is 8000*.
 .. _nox-poetry: https://nox-poetry.readthedocs.io/
 .. _FastAPI: https://fastapi.tiangolo.com/
 
+How to develop with Visual Studio Code
+--------------------------------------
+
+This project supports remote containers in VSC,
+
+Ensure that your *.vscode/settings.json* configuration has the following options:
+
+.. code:: console
+   vscode ➜ /workspaces/mynotes-core (main ✗) $ cat .vscode/settings.json
+   {
+   "python.testing.pytestArgs": [
+      "tests"
+   ],
+   "python.testing.unittestEnabled": false,
+   "python.testing.pytestEnabled": true,
+   "python.formatting.provider": "black",
+   "python.linting.pylintEnabled": false,
+   "python.languageServer": "Pylance"
+   }
+
 How to test the project
 -----------------------
 
