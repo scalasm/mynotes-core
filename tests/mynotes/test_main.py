@@ -19,7 +19,7 @@ def mock_uvicorn_run(
 def mock_config(
     mocker: MockerFixture,
 ) -> Mock:
-    """Provides a mock instead of actual mynotes.port.config package and
+    """Provides a mock instead of actual mynotes\.port\.config package and
     related variables."""
     mock_config = mocker.patch("mynotes.port.config", return_value=None)
 
@@ -31,7 +31,6 @@ def mock_config(
 
 def test_start(mock_uvicorn_run: Mock, mock_config: Mock) -> None:
     """Verify that start() actually calls uvicorn.run()."""
-
     main.start()
 
     assert mock_uvicorn_run.call_count == 1
@@ -39,7 +38,6 @@ def test_start(mock_uvicorn_run: Mock, mock_config: Mock) -> None:
 
 def test_root() -> None:
     """Tests that root() just returns an informative JSON."""
-
     root_response = main.root()
 
     root_response["message"].startswith("MyNotes REST API")

@@ -1,7 +1,7 @@
 """Tests for the auth module."""
-from mynotes.core.architecture.auth import User
-
 import pytest
+
+from mynotes.core.architecture.auth import User
 
 # Note that I could have done just a pragma no cover for the User class
 # but I leave this here as an example.
