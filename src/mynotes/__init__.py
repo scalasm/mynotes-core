@@ -1,1 +1,1 @@
-"""Mynotes Core."""
+"""MyNotes Core."""
