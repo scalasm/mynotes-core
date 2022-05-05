@@ -15,7 +15,7 @@ app.include_router(notes_api.router)
 @app.get("/")
 def root() -> Dict[str, str]:
     """Displays a simple message for the root path."""
-    return {"message": "Hello World from main app"}
+    return {"message": "MyNotes REST API root."}
 
 
 def start() -> None:
