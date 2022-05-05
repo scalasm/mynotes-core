@@ -11,29 +11,38 @@ import mynotes.__main__ as main
 def mock_uvicorn_run(
     mocker: MockerFixture,
 ) -> Mock:
-    """Provides a mock instead of actual uvicorn.run() function."""
+    """Provides a mock instead of actual uvicorn#run() function."""
     return mocker.patch("uvicorn.run", return_value=None)
 
 
 @pytest.fixture
-def mock_config(
+def stub_http_port(
     mocker: MockerFixture,
-) -> Mock:
-    """Provides a mock instead of actual mynotes\.port\.config package and
-    related variables."""
-    mock_config = mocker.patch("mynotes.port.config", return_value=None)
-
-    mock_config.MYNOTES_HTTP_PORT = "8080"
-    mock_config.MYNOTES_DEV_MODE = True
-
-    return mock_config
+) -> int:
+    """Provides a stub for MYNOTES_HTTP_PORT."""
+    return mocker.patch("mynotes.port.config.MYNOTES_HTTP_PORT", 8080)
 
 
-def test_start(mock_uvicorn_run: Mock, mock_config: Mock) -> None:
-    """Verify that start() actually calls uvicorn.run()."""
+@pytest.fixture
+def stub_dev_mode(
+    mocker: MockerFixture,
+) -> bool:
+    """Provides a stub for MYNOTES_DEV_MODE."""
+    return mocker.patch("mynotes.port.config.MYNOTES_DEV_MODE", True)
+
+
+def test_start(
+    mock_uvicorn_run: Mock, stub_http_port: int, stub_dev_mode: bool
+) -> None:
+    """Verify that start() actually calls uvicornùrun()."""
     main.start()
 
-    assert mock_uvicorn_run.call_count == 1
+    mock_uvicorn_run.assert_called_once_with(
+        "mynotes.__main__:app",
+        host="localhost",
+        port=stub_http_port,
+        reload=stub_dev_mode,
+    )
 
 
 def test_root() -> None:

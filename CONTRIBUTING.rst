@@ -89,6 +89,7 @@ This project supports remote containers in VSC,
 Ensure that your *.vscode/settings.json* configuration has the following options:
 
 .. code:: console
+
    vscode ➜ /workspaces/mynotes-core (main ✗) $ cat .vscode/settings.json
    {
    "python.testing.pytestArgs": [
