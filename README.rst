@@ -45,7 +45,7 @@ Features
 Requirements
 ------------
 
-* Python 3.8 or better
+* Python 3.9 or better
 
 
 Installation

@@ -1,14 +1,19 @@
 """Notes API endpoints."""
-import uuid
 from typing import Optional
 
 from fastapi import APIRouter
 
+from mynotes.adapter.in_memory import InMemoryNoteRepository
 from mynotes.core.architecture.data_access import DataPage
-from mynotes.core.architecture.utils import now
-from mynotes.core.notes.domain import Note
-from mynotes.core.notes.domain import NoteType
-
+from mynotes.core.domain.entities import Note
+from mynotes.core.domain.entities import NoteType
+from mynotes.core.usecases.create_note import CreateNoteRequest
+from mynotes.core.usecases.create_note import CreateNoteResponse
+from mynotes.core.usecases.create_note import CreateNoteUseCase
+from mynotes.core.usecases.find_all_notes import FindAllNotesRequest
+from mynotes.core.usecases.find_all_notes import FindAllNotesUseCase
+from mynotes.core.usecases.find_note_by_id import FindNoteByIdRequest
+from mynotes.core.usecases.find_note_by_id import FindNoteByIdUseCase
 
 router = APIRouter(
     prefix="/notes",
@@ -16,17 +21,17 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-STUB_NOTE = Note(
-    id="1",
-    text="This is a new note",
-    author_id="Mario",
-    type=NoteType.FREE,
-    creation_time=now(),
-    tags=["test", "stub"],
-    version=1,
-)
+note_repository = InMemoryNoteRepository()
 
-all_notes = {"1": STUB_NOTE}
+
+@router.on_event("startup")
+def initialize_system() -> None:
+    """Initialize system at startup."""
+    # TODO Initialize things here
+    pass
+
+
+find_by_id_usecase = FindNoteByIdUseCase(note_repository=note_repository)
 
 
 @router.get("/{note_id}")
@@ -39,35 +44,43 @@ async def get_note(note_id: str) -> Optional[Note]:
     Returns:
         the single Note object mathing the requested id
     """
-    return all_notes.get(note_id, None)
+    return find_by_id_usecase.find_by_id(FindNoteByIdRequest(id=note_id)).note
+
+
+find_all_notes_usecase = FindAllNotesUseCase(note_repository=note_repository)
 
 
 @router.get("/")
-async def get_all_notes() -> DataPage[Note]:
+async def get_all_notes(
+    note_type: NoteType = None, page_size: int = 10
+) -> DataPage[Note]:
     """Get all notes.
+
+    Args:
+        note_type: (Query parameter) optional note type for filtering
+        page_size: (Query parameter) optional size for the amount of data
 
     Returns:
         a DataPage containing the Note objects
     """
-    results = list(all_notes.values())
-
-    return DataPage[Note](
-        items=results, page_size=len(results), continuation_token=None
+    result = find_all_notes_usecase.find_all_notes(
+        FindAllNotesRequest(note_type=note_type, page_size=page_size)
     )
+
+    return result.data_page
+
+
+create_note_usecase = CreateNoteUseCase(note_repository=note_repository)
 
 
 @router.post("/")
-async def post(note: Note) -> Note:
+async def create_note(request: CreateNoteRequest) -> CreateNoteResponse:
     """Create a new note (an ID will automatically be assigned).
 
     Args:
-        note: the note to create
+        request: Note creation request.
 
     Returns:
-        the updated note.
+        the created note reference
     """
-    note.id = str(uuid.uuid4())
-
-    all_notes[note.id] = note
-
-    return note
+    return create_note_usecase.create_note(request)

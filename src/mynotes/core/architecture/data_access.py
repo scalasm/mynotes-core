@@ -1,16 +1,18 @@
 """Data access abstractions."""
-from dataclasses import dataclass
 from typing import Generic
 from typing import List
 from typing import Optional
 from typing import TypeVar
 
+from pydantic import BaseModel
+from pydantic import Field
+from pydantic.generics import GenericModel
 
-@dataclass
-class DataPageQuery:
+
+class DataPageQuery(BaseModel):
     """Groups usual query parameters for a set of data."""
 
-    page_size: int = 10
+    page_size: int = Field(min=1, max=50, default=10)
     continuation_token: Optional[str] = None
 
 
@@ -18,10 +20,9 @@ class DataPageQuery:
 T = TypeVar("T")
 
 
-@dataclass
-class DataPage(Generic[T]):
+class DataPage(GenericModel, Generic[T]):
     """Standard response wrapper from a "find" (query) operation."""
 
-    items: List[T]
-    page_size: int
+    items: List[T] = []
+    page_size: int = 0
     continuation_token: Optional[str] = None

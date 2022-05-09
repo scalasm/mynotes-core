@@ -29,3 +29,10 @@ class ResourceNotFoundError(RepositoryError):  # pragma: no cover
 
     resource_type: str
     resource_id: str
+
+
+@dataclass
+class FeatureNotImplementedError(Exception):  # pragma: no cover
+    """Exeception to be used when doing work in progress development."""
+
+    message: str = "<Unknown reason>"

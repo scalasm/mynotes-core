@@ -7,6 +7,7 @@ from typing import List
 from typing import Optional
 
 from pydantic import BaseModel
+from pydantic import Field
 
 from mynotes.core.architecture.data_access import DataPage
 from mynotes.core.architecture.data_access import DataPageQuery
@@ -16,31 +17,33 @@ class NoteType(Enum):
     """Supported note types (free notes and interview notes)."""
 
     FREE = "F"
-    INTERVIEW = ("I",)
+    INTERVIEW = "I"
     QUESTION = "Q"
 
 
 class Note(BaseModel):
     """Entity class representing metadata associated to a Note entity."""
 
-    id: str
-    text: str
-    author_id: str
-    type: NoteType
-    creation_time: datetime
-    tags: List[str]
-    version: int
+    id: Optional[str] = Field()
+    text: str = Field(...)
+    author_id: str = Field(...)
+    type: NoteType = Field(...)
+    creation_time: datetime = Field(...)
+    tags: List[str] = Field(...)
 
 
 class NoteRepository(ABC):
     """Data access operations for Note entities."""
 
     @abstractmethod
-    def save(self, note: Note) -> None:
+    def save(self, note: Note) -> Note:
         """Save a note.
 
         Args:
             note: the note to save
+
+        Returns:
+            the updated note with its id set
         """
         pass
 
@@ -64,6 +67,18 @@ class NoteRepository(ABC):
 
         Args:
             note_id: the id of the note to delete
+        """
+        pass
+
+    @abstractmethod
+    def find_all(self, data_page_query: DataPageQuery) -> DataPage[Note]:
+        """Find all notes regardless of their type or any other criteria.
+
+        Args:
+            data_page_query: paging data for running the query
+
+        Returns
+            a DataPage, eventually empty if no data was found
         """
         pass
 
