@@ -46,6 +46,8 @@ class FindNoteByIdUseCase:
         """
         note = self._note_repository.find_by_id(request.id)
         if not note:
-            raise ResourceNotFoundError(resource_type="Note", resource_id=request.id)
+            raise ResourceNotFoundError(
+                resource_type="Note", resource_id=request.id
+            )
 
         return FindNoteByIdResponse(note=note)

@@ -62,10 +62,13 @@ class InMemoryNoteRepository(NoteRepository):
         """Find all notes by type."""
         filtered_notes = list(
             filter(
-                lambda note: note.type == note_type, list(self._note_storage.values())
+                lambda note: note.type == note_type,
+                list(self._note_storage.values()),
             )
         )
 
         return DataPage(
-            continuation_token=None, page_size=len(filtered_notes), items=filtered_notes
+            continuation_token=None,
+            page_size=len(filtered_notes),
+            items=filtered_notes,
         )

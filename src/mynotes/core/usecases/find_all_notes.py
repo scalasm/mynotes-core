@@ -37,7 +37,9 @@ class FindAllNotesUseCase:
         """
         self._note_repository = note_repository
 
-    def find_all_notes(self, request: FindAllNotesRequest) -> FindAllNotesResponse:
+    def find_all_notes(
+        self, request: FindAllNotesRequest
+    ) -> FindAllNotesResponse:
         """Create a new note.
 
         Args:

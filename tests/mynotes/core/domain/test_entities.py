@@ -15,8 +15,22 @@ DEFAULT_NOW = datetime.datetime(2022, 5, 1)
 test_note_creation_data = [
     (None, "text", "some_author", NoteType.FREE, DEFAULT_NOW, ["test"]),
     (None, "text", "some_author", NoteType.FREE, DEFAULT_NOW, []),
-    (None, "text", "some_author", NoteType.FREE, DEFAULT_NOW, ["test1", "test2"]),
-    ("fake_id", "text", "some_author", NoteType.FREE, DEFAULT_NOW, ["test1", "test2"]),
+    (
+        None,
+        "text",
+        "some_author",
+        NoteType.FREE,
+        DEFAULT_NOW,
+        ["test1", "test2"],
+    ),
+    (
+        "fake_id",
+        "text",
+        "some_author",
+        NoteType.FREE,
+        DEFAULT_NOW,
+        ["test1", "test2"],
+    ),
 ]
 
 
